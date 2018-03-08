@@ -1,0 +1,5 @@
+PIN_1 = 2
+PIN_2 = 3
+PINS = [PIN_1,PIN_2]
+SLEEP_TIME = 10
+WORK_TIME = 3
