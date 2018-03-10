@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import RPi.GPIO as GPIO
-from datetime import datetime, time
-from time import sleep
+import datetime
+import time
 
 def setup(pins):
 
@@ -16,10 +16,10 @@ def teardown():
     GPIO.cleanup()
 
 def got_to_work(start, end):
-    now = datetime.now()
+    now = datetime.datetime.now()
     now_time = now.time()
-    start_time = time(start)
-    end_time = time(end)
+    start_time = datetime.time(start)
+    end_time = datetime.time(end)
 
     if start_time < end_time:
         return now_time >= start_time and now_time <= end_time
@@ -29,11 +29,11 @@ def got_to_work(start, end):
 def work(work_time, sleep_time, pins):
     for i in pins:
         GPIO.output(i, GPIO.LOW)
-    sleep(work_time)
+    time.sleep(work_time)
     for i in pins:
         GPIO.output(i, GPIO.HIGH)
-    sleep(sleep_time)
+    time.sleep(sleep_time)
 
 def sanitize(args):
-    time(args.start_time)
-    time(args.end_time)
+    datetime.time(args.start_time)
+    datetime.time(args.end_time)
