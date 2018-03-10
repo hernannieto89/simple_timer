@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import RPi.GPIO as GPIO
 from datetime import datetime, time
+from time import sleep
 
 def setup(pins):
 
@@ -28,10 +29,10 @@ def got_to_work(start, end):
 def work(work_time, sleep_time, pins):
     for i in pins:
         GPIO.output(i, GPIO.LOW)
-    time.sleep(work_time)
+    sleep(work_time)
     for i in pins:
         GPIO.output(i, GPIO.HIGH)
-    time.sleep(sleep_time)
+    sleep(sleep_time)
 
 def sanitize(args):
     time(args.start_time)
