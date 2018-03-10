@@ -27,6 +27,7 @@ def got_to_work(start, end):
         return now_time >= start_time or now_time <= end_time
 
 def work(work_time, sleep_time, pins):
+    print work_time, sleep_time, pins
     for i in pins:
         GPIO.output(i, GPIO.LOW)
     time.sleep(work_time)

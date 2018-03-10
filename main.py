@@ -7,27 +7,32 @@ def main():
     parser = argparse.ArgumentParser(description='Simple timer.')
     parser.add_argument('--pins',
                         action='store',
+                        dest = 'pins',
                         nargs='+',
                         type=int,
                         required=True,
                         help='raspberry pins GPIO.BCM mode')
     parser.add_argument('--start_time',
                         action='store',
+                        dest = 'start_time',
                         type=int,
                         required=True,
                         help='start time for timer (between 0 and 23)')
     parser.add_argument('--end_time',
                         action='store',
+                        dest = 'end_time',
                         type=int,
                         required=True,
                         help='end time for timer (between 0 and 23)')
     parser.add_argument('--work_time',
                         action='store',
+                        dest = 'work_time',
                         type=int,
                         required=True,
                         help='work time for timer (in seconds)')
     parser.add_argument('--sleep_time',
                         action='store',
+                        dest='sleep_time',
                         type=int,
                         required=True,
                         help='sleep time for timer (in seconds)')
@@ -45,6 +50,16 @@ def main():
     # setup GPIO
     setup(pins)
     print(args)
+    print('start')
+    print(start)
+    print('end')
+    print(end)
+    print('wtime')
+    print(work_time)
+    print('stime')
+    print(sleep_time)
+    print('pins')
+    print(pins)
     try:
         while True:
             if got_to_work(start, end):
