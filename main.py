@@ -49,7 +49,7 @@ def main():
 		# End program cleanly with keyboard
         print  "KeyboardInterrupt captured. Cleaning and exiting..."
 		# Reset GPIO settings
-		teardown()
+        teardown()
 
 if __name__ == "__main__":
 	main()
