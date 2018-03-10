@@ -45,21 +45,8 @@ def main():
     pins = args.pins
     work_time = args.work_time
     sleep_time = args.sleep_time
-    # Cleanup in case power shutdowm
-    teardown()
     # setup GPIO
     setup(pins)
-    print(args)
-    print('start')
-    print(start)
-    print('end')
-    print(end)
-    print('wtime')
-    print(work_time)
-    print('stime')
-    print(sleep_time)
-    print('pins')
-    print(pins)
     try:
         while True:
             if got_to_work(start, end):
