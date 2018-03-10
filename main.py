@@ -12,18 +12,22 @@ def main():
                         required=True,
                         help='raspberry pins GPIO.BCM mode')
     parser.add_argument('--start_time',
+                        action='store',
                         type=int,
                         required=True,
                         help='start time for timer (between 0 and 23)')
     parser.add_argument('--end_time',
+                        action='store',
                         type=int,
                         required=True,
                         help='end time for timer (between 0 and 23)')
     parser.add_argument('--work_time',
+                        action='store',
                         type=int,
                         required=True,
                         help='work time for timer (in seconds)')
     parser.add_argument('--sleep_time',
+                        action='store',
                         type=int,
                         required=True,
                         help='sleep time for timer (in seconds)')
