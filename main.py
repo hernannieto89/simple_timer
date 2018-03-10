@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import argparse
+from graceful_killer import GracefulKiller
 from helpers import teardown, got_to_work, setup, work, sanitize
 
 def main():
@@ -48,14 +49,18 @@ def main():
     # setup GPIO
     setup(pins)
     try:
+        killer = GracefulKiller()
         while True:
+            if killer.kill_now:
+                break
             if got_to_work(start, end):
                 work(work_time, sleep_time, pins)
+        print "Program killed gracefully. Cleaning and exiting..."
     except KeyboardInterrupt:
 		# End program cleanly with keyboard
         print  "KeyboardInterrupt captured. Cleaning and exiting..."
-		# Reset GPIO settings
-        teardown()
+	# Reset GPIO settings
+    teardown()
 
 if __name__ == "__main__":
 	main()
