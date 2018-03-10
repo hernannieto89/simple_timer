@@ -41,13 +41,13 @@ def main():
     # setup GPIO
     setup(pins)
 
-	try:
-		while True:
+    try:
+        while True:
             if got_to_work(start, end):
-        		work(work_time, sleep_time, pins)
-	except KeyboardInterrupt:
+                work(work_time, sleep_time, pins)
+    except KeyboardInterrupt:
 		# End program cleanly with keyboard
-		print  "KeyboardInterrupt captured. Cleaning and exiting..."
+        print  "KeyboardInterrupt captured. Cleaning and exiting..."
 		# Reset GPIO settings
 		teardown()
 
