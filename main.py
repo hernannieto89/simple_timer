@@ -44,7 +44,7 @@ def main():
     teardown()
     # setup GPIO
     setup(pins)
-
+    print(args)
     try:
         while True:
             if got_to_work(start, end):
