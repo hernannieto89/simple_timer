@@ -85,8 +85,7 @@ def check_sudo():
     """
     try:
         os.mkdir('/etc/foo')
-    except IOError as e:
-        if e[0] == errno.EPERM:
-            print >> sys.stderr, "You need to have root privileges to run this script.\n" \
-                                 "Please try again, this time using 'sudo'. Exiting."
-            sys.exit(1)
+    except OSError:
+        print >> sys.stderr, "You need to have root privileges to run this script.\n" \
+                             "Please try again, this time using 'sudo'. Exiting."
+        sys.exit(1)
