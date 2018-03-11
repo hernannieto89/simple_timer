@@ -2,6 +2,9 @@
 """
 Simple timer - Helpers module.
 """
+import os
+import sys
+import errno
 import datetime
 import time
 import RPi.GPIO as GPIO
@@ -73,3 +76,17 @@ def sanitize(args):
     """
     datetime.time(args.start_time)
     datetime.time(args.end_time)
+
+
+def check_sudo():
+    """
+    Checks for superuser privileges.
+    :return: None
+    """
+    try:
+        os.rename('/etc/foo', '/etc/bar')
+    except IOError as e:
+        if e[0] == errno.EPERM:
+            print >> sys.stderr, "You need to have root privileges to run this script.\n" \
+                                 "Please try again, this time using 'sudo'. Exiting."
+            sys.exit(1)

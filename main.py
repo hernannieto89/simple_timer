@@ -4,14 +4,14 @@ Simple timer - Main module.
 """
 import argparse
 from graceful_killer import GracefulKiller
-from helpers import teardown, got_to_work, setup, work, sanitize
+from helpers import teardown, got_to_work, setup, work, sanitize, check_sudo
 
 
 def main():
     """
     Simple timer.
     """
-
+    check_sudo()
     parser = argparse.ArgumentParser(description='Simple timer.')
     parser.add_argument('--pins',
                         action='store',
