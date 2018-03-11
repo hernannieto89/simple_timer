@@ -18,17 +18,18 @@ When within certain time range provided by **start_time** and **end_time**, this
 turns on relays provided by **pins** (*GPIO BCM addresses list*) for certain **work_time**.
 Then it turns off relays and sleeps for **sleep_time**.
 If the program is outside the time range provided, It just waits for next day time range.
-This loop is repeated indefinitely, ie, to terminate a keyboard interrupt or a sigterm signal
-is required.
+This loop is repeated indefinitely.
+To terminate a keyboard interrupt or a sigterm signal is required.
+This program is thought to run as a service.
 ##
 
 ## Warnings
 Relay addresses need to be provided according to **GPIO BCM** format.
 For more information please check this [link](https://es.pinout.xyz/).
-This program is designed to work with 5v n way relays. Do not try to execute
-this code with other modules. 
-For more information please check this [Link](https://www.youtube.com/watch?v=OQyntQLazMU).
-This program is thought to run as a service.
+This program is designed to work with 5v n way relays.
+Do not try to execute this code with other modules. 
+For more information please check this [link](https://www.youtube.com/watch?v=OQyntQLazMU).
+Run it at your own risk.
 
 ## Usage
 Execute main.py, several flags are required.
