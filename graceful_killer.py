@@ -15,7 +15,7 @@ class GracefulKiller(object):  # pylint: disable=too-few-public-methods
         signal.signal(signal.SIGINT, self.exit_gracefully)
         signal.signal(signal.SIGTERM, self.exit_gracefully)
 
-    def exit_gracefully(self):
+    def exit_gracefully(self, signum, frame):
         """
         Sets kill_now attribute to true. Allowing main module to break infinite loop.
         :return: None
