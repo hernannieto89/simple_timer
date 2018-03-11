@@ -30,13 +30,13 @@ def main():
                         dest = 'work_time',
                         type=int,
                         required=True,
-                        help='work time for timer (in seconds)')
+                        help='work time for job (in seconds)')
     parser.add_argument('--sleep_time',
                         action='store',
                         dest='sleep_time',
                         type=int,
                         required=True,
-                        help='sleep time for timer (in seconds)')
+                        help='sleep time for job (in seconds)')
 
     args = parser.parse_args()
     #sanitizes args

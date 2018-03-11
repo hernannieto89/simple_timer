@@ -5,6 +5,7 @@ import time
 
 def setup(pins):
 
+    GPIO.setwarnings(False)
     GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
 
