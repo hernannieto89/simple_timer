@@ -6,10 +6,11 @@ import signal
 
 
 class GracefulKiller(object):
-    """
-    Credits: https://stackoverflow.com/questions/18499497/how-to-process-sigterm-signal-gracefully
-    """
+
     def __init__(self):
+        """
+        Credits: https://stackoverflow.com/questions/18499497/how-to-process-sigterm-signal-gracefully
+        """
         self.kill_now = False
         signal.signal(signal.SIGINT, self.exit_gracefully)
         signal.signal(signal.SIGTERM, self.exit_gracefully)
