@@ -84,7 +84,7 @@ def check_sudo():
     :return: None
     """
     try:
-        os.rename('/etc/foo', '/etc/bar')
+        os.mkdir('/etc/foo')
     except IOError as e:
         if e[0] == errno.EPERM:
             print >> sys.stderr, "You need to have root privileges to run this script.\n" \
