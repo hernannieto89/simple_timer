@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 import datetime
 import time
 
+
 def setup(pins):
 
     GPIO.setwarnings(False)
@@ -13,8 +14,10 @@ def setup(pins):
         GPIO.setup(i, GPIO.OUT)
         GPIO.output(i, GPIO.HIGH)
 
+
 def teardown():
     GPIO.cleanup()
+
 
 def got_to_work(start, end):
     now = datetime.datetime.now()
@@ -24,8 +27,9 @@ def got_to_work(start, end):
 
     if start_time < end_time:
         return now_time >= start_time and now_time <= end_time
-    else: #Over midnight
+    else:  # Over midnight
         return now_time >= start_time or now_time <= end_time
+
 
 def work(work_time, sleep_time, pins):
     for i in pins:
@@ -34,6 +38,7 @@ def work(work_time, sleep_time, pins):
     for i in pins:
         GPIO.output(i, GPIO.HIGH)
     time.sleep(sleep_time)
+
 
 def sanitize(args):
     datetime.time(args.start_time)

@@ -3,6 +3,7 @@ import argparse
 from graceful_killer import GracefulKiller
 from helpers import teardown, got_to_work, setup, work, sanitize
 
+
 def main():
 
     parser = argparse.ArgumentParser(description='Simple timer.')
@@ -39,7 +40,7 @@ def main():
                         help='sleep time for job (in seconds)')
 
     args = parser.parse_args()
-    #sanitizes args
+    # sanitizes args
     sanitize(args)
     start = args.start_time
     end = args.end_time
@@ -57,10 +58,11 @@ def main():
                 work(work_time, sleep_time, pins)
         print "Program killed gracefully. Cleaning and exiting..."
     except KeyboardInterrupt:
-		# End program cleanly with keyboard
-        print  "KeyboardInterrupt captured. Cleaning and exiting..."
-	# Reset GPIO settings
+        # End program cleanly with keyboard
+        print "KeyboardInterrupt captured. Cleaning and exiting..."
+    # Reset GPIO settings
     teardown()
 
+
 if __name__ == "__main__":
-	main()
+    main()
