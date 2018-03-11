@@ -1,34 +1,40 @@
 #!/usr/bin/python
+"""
+Simple timer - Main module.
+"""
 import argparse
 from graceful_killer import GracefulKiller
 from helpers import teardown, got_to_work, setup, work, sanitize
 
 
 def main():
+    """
+    Simple timer.
+    """
 
     parser = argparse.ArgumentParser(description='Simple timer.')
     parser.add_argument('--pins',
                         action='store',
-                        dest = 'pins',
+                        dest='pins',
                         nargs='+',
                         type=int,
                         required=True,
                         help='raspberry pins GPIO.BCM mode')
     parser.add_argument('--start_time',
                         action='store',
-                        dest = 'start_time',
+                        dest='start_time',
                         type=int,
                         required=True,
                         help='start time for timer (between 0 and 23)')
     parser.add_argument('--end_time',
                         action='store',
-                        dest = 'end_time',
+                        dest='end_time',
                         type=int,
                         required=True,
                         help='end time for timer (between 0 and 23)')
     parser.add_argument('--work_time',
                         action='store',
-                        dest = 'work_time',
+                        dest='work_time',
                         type=int,
                         required=True,
                         help='work time for job (in seconds)')

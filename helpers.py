@@ -1,10 +1,18 @@
 #!/usr/bin/python
-import RPi.GPIO as GPIO
+"""
+Simple timer - Helpers module.
+"""
 import datetime
 import time
+import RPi.GPIO as GPIO
 
 
 def setup(pins):
+    """
+    GPIO setup.
+    :param pins:
+    :return: None
+    """
 
     GPIO.setwarnings(False)
     GPIO.cleanup()
@@ -16,10 +24,20 @@ def setup(pins):
 
 
 def teardown():
+    """
+    Performs GPIO cleanup
+    :return: None
+    """
     GPIO.cleanup()
 
 
 def got_to_work(start, end):
+    """
+    Ask if actual hour is within start - end range.
+    :param start:
+    :param end:
+    :return: Boolean
+    """
     now = datetime.datetime.now()
     now_time = now.time()
     start_time = datetime.time(start)
@@ -27,11 +45,18 @@ def got_to_work(start, end):
 
     if start_time < end_time:
         return now_time >= start_time and now_time <= end_time
-    else:  # Over midnight
-        return now_time >= start_time or now_time <= end_time
+    # Over midnight
+    return now_time >= start_time or now_time <= end_time
 
 
 def work(work_time, sleep_time, pins):
+    """
+    Performs job for work_time, sleeps for sleep_time.
+    :param work_time:
+    :param sleep_time:
+    :param pins:
+    :return: None
+    """
     for i in pins:
         GPIO.output(i, GPIO.LOW)
     time.sleep(work_time)
@@ -41,5 +66,10 @@ def work(work_time, sleep_time, pins):
 
 
 def sanitize(args):
+    """
+    Sanitizes start_time and end_time parameters.
+    :param args
+    :return: None
+    """
     datetime.time(args.start_time)
     datetime.time(args.end_time)
