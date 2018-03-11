@@ -4,7 +4,6 @@ Simple timer - Helpers module.
 """
 import os
 import sys
-import errno
 import datetime
 import time
 import RPi.GPIO as GPIO
@@ -83,9 +82,7 @@ def check_sudo():
     Checks for superuser privileges.
     :return: None
     """
-    try:
-        os.mkdir('/etc/foo')
-    except OSError:
+    if os.getuid() != 0:
         print >> sys.stderr, "You need to have root privileges to run this script.\n" \
                              "Please try again, this time using 'sudo'. Exiting."
         sys.exit(1)
