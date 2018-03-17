@@ -62,9 +62,10 @@ def work(work_time, sleep_time, pins):
     for i in pins:
         GPIO.output(i, GPIO.LOW)
     time.sleep(work_time)
-    for i in pins:
-        GPIO.output(i, GPIO.HIGH)
-    time.sleep(sleep_time)
+    if sleep_time > 0:
+        for i in pins:
+            GPIO.output(i, GPIO.HIGH)
+        time.sleep(sleep_time)
 
 
 def sanitize(args):
