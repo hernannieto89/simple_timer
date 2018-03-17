@@ -4,7 +4,7 @@ Simple timer - Main module.
 """
 import argparse
 from graceful_killer import GracefulKiller
-from helpers import teardown, got_to_work, setup, work, sanitize, check_sudo
+from helpers import teardown, got_to_work, setup, work, sanitize, check_sudo, continuous_work
 
 
 def main():
@@ -53,15 +53,21 @@ def main():
     pins = args.pins
     work_time = args.work_time
     sleep_time = args.sleep_time
+    continuous = sleep_time <= 0
     # setup GPIO
     setup(pins)
     try:
         killer = GracefulKiller()
         while True:
+            on_time = got_to_work(start, end)
             if killer.kill_now:
                 break
-            if got_to_work(start, end):
-                work(work_time, sleep_time, pins)
+            if not continuous:
+                if on_time:
+                    work(work_time, sleep_time, pins)
+            else:
+                continuous_work(work_time, pins, on_time)
+
         print "Program killed gracefully. Cleaning and exiting..."
     except KeyboardInterrupt:
         # End program cleanly with keyboard

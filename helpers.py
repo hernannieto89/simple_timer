@@ -51,7 +51,7 @@ def got_to_work(start, end):
     return now_time >= start_time or now_time <= end_time
 
 
-def work(work_time, sleep_time, pins):
+def work(work_time, sleep_time, pins, continuous):
     """
     Performs job for work_time, sleeps for sleep_time.
     :param work_time:
@@ -62,10 +62,27 @@ def work(work_time, sleep_time, pins):
     for i in pins:
         GPIO.output(i, GPIO.LOW)
     time.sleep(work_time)
-    if sleep_time > 0:
+    if not continuous:
         for i in pins:
             GPIO.output(i, GPIO.HIGH)
         time.sleep(sleep_time)
+
+
+def continuous_work(work_time, pins, on_time):
+    """
+    Performs job for work_time.
+    :param work_time:
+    :param on_time:
+    :param pins:
+    :return: None
+    """
+    if on_time:
+        for i in pins:
+            GPIO.output(i, GPIO.LOW)
+        time.sleep(work_time)
+    else:
+        for i in pins:
+            GPIO.output(i, GPIO.HIGH)
 
 
 def sanitize(args):
