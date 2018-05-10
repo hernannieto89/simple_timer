@@ -17,10 +17,9 @@ def setup(pins):
     """
 
     GPIO.setwarnings(False)
-    #GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
-
     for i in pins:
+        GPIO.cleanup(i)
         GPIO.setup(i, GPIO.OUT)
         GPIO.output(i, GPIO.HIGH)
 
@@ -32,7 +31,7 @@ def teardown(pins):
     """
     for i in pins:
         GPIO.output(i, GPIO.HIGH)
-    GPIO.cleanup()
+        GPIO.cleanup(i)
 
 
 def got_to_work(start, end):
@@ -62,10 +61,16 @@ def work(work_time, sleep_time, pins):
     :return: None
     """
     for i in pins:
-        GPIO.output(i, GPIO.LOW)
+        GPIO.setup(i, GPIO.IN)
+        if GPIO.input(i) != GPIO.LOW:
+            GPIO.setup(i, GPIO.OUT)
+            GPIO.output(i, GPIO.LOW)
     time.sleep(work_time)
     for i in pins:
-        GPIO.output(i, GPIO.HIGH)
+        GPIO.setup(i, GPIO.IN)
+        if GPIO.input(i) != GPIO.HIGH:
+            GPIO.setup(i, GPIO.OUT)
+            GPIO.output(i, GPIO.HIGH)
     time.sleep(sleep_time)
 
 
@@ -79,11 +84,17 @@ def continuous_work(work_time, pins, on_time):
     """
     if on_time:
         for i in pins:
-            GPIO.output(i, GPIO.LOW)
+            GPIO.setup(i, GPIO.IN)
+            if GPIO.input(i) != GPIO.LOW:
+                GPIO.setup(i, GPIO.OUT)
+                GPIO.output(i, GPIO.LOW)
         time.sleep(work_time)
     else:
         for i in pins:
-            GPIO.output(i, GPIO.HIGH)
+            GPIO.setup(i, GPIO.IN)
+            if GPIO.input(i) != GPIO.HIGH:
+                GPIO.setup(i, GPIO.OUT)
+                GPIO.output(i, GPIO.HIGH)
 
 
 def sanitize(args):
