@@ -20,7 +20,7 @@ def setup(pins):
     GPIO.setmode(GPIO.BCM)
     for i in pins:
         GPIO.cleanup(i)
-        GPIO.setup(i, GPIO.OUT, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(i, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
         GPIO.output(i, GPIO.HIGH)
 
 
@@ -61,15 +61,15 @@ def work(work_time, sleep_time, pins):
     :return: None
     """
     for i in pins:
-        GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         if GPIO.input(i) != GPIO.LOW:
-            GPIO.setup(i, GPIO.OUT, pull_up_down=GPIO.PUD_UP)
+            GPIO.setup(i, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
             GPIO.output(i, GPIO.LOW)
     time.sleep(work_time)
     for i in pins:
-        GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         if GPIO.input(i) != GPIO.HIGH:
-            GPIO.setup(i, GPIO.OUT, pull_up_down=GPIO.PUD_UP)
+            GPIO.setup(i, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
             GPIO.output(i, GPIO.HIGH)
     time.sleep(sleep_time)
 
@@ -84,15 +84,15 @@ def continuous_work(work_time, pins, on_time):
     """
     if on_time:
         for i in pins:
-            GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+            GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
             if GPIO.input(i) != GPIO.LOW:
-                GPIO.setup(i, GPIO.OUT, pull_up_down=GPIO.PUD_UP)
+                GPIO.setup(i, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
                 GPIO.output(i, GPIO.LOW)
     else:
         for i in pins:
-            GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+            GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
             if GPIO.input(i) != GPIO.HIGH:
-                GPIO.setup(i, GPIO.OUT, pull_up_down=GPIO.PUD_UP)
+                GPIO.setup(i, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
                 GPIO.output(i, GPIO.HIGH)
     time.sleep(work_time)
 
