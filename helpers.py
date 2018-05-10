@@ -25,11 +25,13 @@ def setup(pins):
         GPIO.output(i, GPIO.HIGH)
 
 
-def teardown():
+def teardown(pins):
     """
     Performs GPIO cleanup
     :return: None
     """
+    for i in pins:
+        GPIO.output(i, GPIO.HIGH)
     GPIO.cleanup()
 
 
