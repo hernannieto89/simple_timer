@@ -88,13 +88,13 @@ def continuous_work(work_time, pins, on_time):
             if GPIO.input(i) != GPIO.LOW:
                 GPIO.setup(i, GPIO.OUT)
                 GPIO.output(i, GPIO.LOW)
-        time.sleep(work_time)
     else:
         for i in pins:
             GPIO.setup(i, GPIO.IN)
             if GPIO.input(i) != GPIO.HIGH:
                 GPIO.setup(i, GPIO.OUT)
                 GPIO.output(i, GPIO.HIGH)
+    time.sleep(work_time)
 
 
 def sanitize(args):
