@@ -17,7 +17,7 @@ def setup(pins):
     """
 
     GPIO.setwarnings(False)
-    GPIO.cleanup()
+    #GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
 
     for i in pins:
