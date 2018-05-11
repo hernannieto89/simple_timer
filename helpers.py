@@ -15,7 +15,6 @@ def setup(pins):
     :param pins:
     :return: None
     """
-
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     for i in pins:
@@ -74,10 +73,10 @@ def work(work_time, sleep_time, pins):
     time.sleep(sleep_time)
 
 
-def continuous_work(work_time, pins, on_time):
+def continuous_work(remaining_time, pins, on_time):
     """
-    Performs job for work_time.
-    :param work_time:
+    Performs job if needed and waits for remaining time.
+    :param remaining_time:
     :param on_time:
     :param pins:
     :return: None
@@ -94,7 +93,38 @@ def continuous_work(work_time, pins, on_time):
             if GPIO.input(i) != GPIO.HIGH:
                 GPIO.setup(i, GPIO.OUT)
                 GPIO.output(i, GPIO.HIGH)
-    time.sleep(work_time)
+    time.sleep(remaining_time)
+
+
+def get_remaining_time(time_goal):
+    """
+    Returns remaining time in seconds between current time and specified goal.
+    :param time_goal:
+    :return: remaining_time
+    """
+    now = datetime.datetime.now()
+    return (datetime.timedelta(hours=24) - (now - now.replace(hour=time_goal,
+                                                              minute=0,
+                                                              second=0,
+                                                              microsecond=0)
+                                            )
+            ).total_seconds() % (24 * 3600)
+
+
+def get_time_goal(start, end, on_time):
+    """
+    Gets current time goal.
+    :param start:
+    :param end:
+    :param on_time:
+    :return time_goal:
+    """
+    if on_time:
+        time_goal = end
+    else:
+        time_goal = start
+
+    return time_goal
 
 
 def sanitize(args):

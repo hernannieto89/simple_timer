@@ -4,7 +4,8 @@ Simple timer - Main module.
 """
 import argparse
 from graceful_killer import GracefulKiller
-from helpers import teardown, got_to_work, setup, work, sanitize, check_sudo, continuous_work
+from helpers import teardown, got_to_work, setup, work, sanitize, check_sudo,\
+                    continuous_work, get_remaining_time, get_time_goal
 
 
 def main():
@@ -66,7 +67,9 @@ def main():
                 if on_time:
                     work(work_time, sleep_time, pins)
             else:
-                continuous_work(work_time, pins, on_time)
+                time_goal = get_time_goal(start, end, on_time)
+                remaining_time = get_remaining_time(time_goal)
+                continuous_work(remaining_time, pins, on_time)
 
         print "Program killed gracefully. Cleaning and exiting..."
     except KeyboardInterrupt:
